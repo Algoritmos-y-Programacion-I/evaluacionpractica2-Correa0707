@@ -20,10 +20,10 @@ public class Executable {
         Executable exe = new Executable();
         exe.menu();
     }
-    
-    /** 
+
+    /**
      * Descripcion: Despliega el menu principal de funcionalidades al usuario
-    */
+     */
     public void menu() {
 
         boolean flag = true;
@@ -59,21 +59,55 @@ public class Executable {
 
     }
 
-    /** 
-     * Descripcion: Solicita al usuario la informacion necesaria para registrar un Project 
+    /**
+     * Descripcion: Solicita al usuario la informacion necesaria para registrar un
+     * Project
      * en un Pillar en el sistema
-    */
+     */
     public void registerProject() {
-
         reader.nextLine();
+        System.out.println("Seleccione el tipo de pilar  en el que va a registrar el proyecto " + "\n" +
+                "1: Biodiversidad" + "\n" +
+                "2: Agua" + "\n" +
+                "3: Tratamiento de basuras" + "\n" +
+                "4: Energia");
+        int pillarType = reader.nextInt();
+        reader.nextLine();
+        System.out.println("Digite el id del proyecto a registrar");
+        String id = reader.nextLine();
+        System.out.println("Digite el nombre del proyecto");
+        String name = reader.nextLine();
+        System.out.println("Digite la descripcion del proyecto");
+        String description = reader.nextLine();
+        System.out.println("Cual sera el estatus del proyecto"+"\n"+
+        "1.Activo"+"\n"+
+        "2.Inactivo");
+        int statusUser = reader.nextInt();
+        if(control.registerProjectInPillar(pillarType, id, name, description, statusUser)){
+            System.out.println("Registrado Exitosamente");
+        } else{
+            System.out.println("No se ha podido registrar,pilares llenos");
+        }
+    }
+
+    /**
+     * Descripcion: Muestra al usuario los Projects registrados en un Pillar
+     */
+        public void showProjectsByPillar() {
+            System.out.println("Proporcione el pilar del cual deseas ver sus proyectos");
+            System.out.println("1) Biodiversidad");
+            System.out.println("2) Agua");
+            System.out.println("3) Tratamiento de Basuras");
+            System.out.println("4) Energía");
+            int pilar = reader.nextInt();
+            reader.nextLine();
+            if (pilar <= 4 && pilar >= 1) {
+                System.out.println(control.queryProjectsByPillar(pilar));
+            } else {
+                System.out.println("Valor de pilar invalido!");
+            }
+
+        }
 
     }
 
-    /** 
-     * Descripcion: Muestra al usuario los Projects registrados en un Pillar 
-    */
-    public void showProjectsByPillar() {
-
-    }
-
-}
